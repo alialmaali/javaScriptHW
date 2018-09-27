@@ -1,9 +1,7 @@
 // from data.js
 
 var tableData = data;
-
 var targetTtable = d3.select("#ufo-table");
-
 var targetBbody = targetTtable.select("tbody");
 
 // YOUR CODE HERE!
@@ -17,35 +15,18 @@ function handleSubmit() {
   
 
     // Select the input value from the form
-
     var filterdate = d3.select("#datetime").node().value;
-
     console.log(filterdate);
 
   
 
     // clear the input value
-
     targetTtable.select("tbody").text("");
-
-  
-
+    
     // Build the table with the new data
-
     filterData(filterdate);
 
 }
-
-// var filters={
-
-//     "datetime": d3.select("#datetime").node().value,
-
-//     "state": d3.select("#state").node().value,
-
-//     "shapes": d3.select("#shape").node().value,
-
-// };
-
 
 
 function capitalizeFirstLetter(string) {
@@ -55,90 +36,50 @@ function capitalizeFirstLetter(string) {
 }
 
 function filterData(dd) {
-
-    // alert(dd);
-
-    var checkboxes = document.querySelectorAll('input[name=country]:checked');
+   var checkboxes = document.querySelectorAll('input[name=country]:checked');
 
     countries = [];
 
-    // for (var i = 0; i < checkboxes.length; i++) {countries.push(encodeURIComponent(checkboxes[i].value))}
+    
 
     for (var i = 0; i < checkboxes.length; i++) {countries.push(checkboxes[i].value)}
-
-    // console.log(countries);
-
-
-
+    
     var checkboxes = document.querySelectorAll('input[name=shapes]:checked');
-
     shapes = [];
 
     for (var i = 0; i < checkboxes.length; i++) {shapes.push(checkboxes[i].value)}
-
-    // console.log(shapes);
-
-
-
+    
     var checkboxes = document.querySelectorAll('input[name=cities]:checked');
-
+    
     cities = [];
-
     for (var i = 0; i < checkboxes.length; i++) {cities.push(checkboxes[i].value)}
-
-    // console.log(cities);
-
-
-
+    
     var checkboxes = document.querySelectorAll('input[name=states]:checked');
 
     states = [];
 
     for (var i = 0; i < checkboxes.length; i++) {states.push(checkboxes[i].value)}
 
-    // console.log(states);
-
     if(dd==""){
-
-        // console.log(dates);
-
-        dates_2 = dates;
+      dates_2 = dates;
 
     }else{
-
-        dates_2 = [dd]
+      dates_2 = [dd]
 
     }
-
-
-
-    targetTtable.select("tbody").text("");
-
-    for(i=0;i<tableData.length;i++){
-
-        // console.log(tableData[i].datetime);
-
-        // if(String(tableData[i].datetime)==String(dd) && states.includes(tableData[i].state) && cities.includes(tableData[i].city) && shapes.includes(tableData[i].shape) && countries.includes(tableData[i].country)){
-
-        if(dates_2.includes(tableData[i].datetime) && states.includes(tableData[i].state) && cities.includes(tableData[i].city) && shapes.includes(tableData[i].shape) && countries.includes(tableData[i].country)){
-
-            // console.log(tableData[i]);
-
-            var tbodytr = targetBbody.append("tr");
-
-            tbodytr.append("td").text(tableData[i].datetime);
-
-            tbodytr.append("td").text(tableData[i].city);
-
-            tbodytr.append("td").text(tableData[i].state);
-
-            tbodytr.append("td").text(tableData[i].country);
-
-            tbodytr.append("td").text(tableData[i].shape);
-
-            tbodytr.append("td").text(tableData[i].durationMinutes);
-
-            tbodytr.append("td").text(tableData[i].comments);
+    
+  targetTtable.select("tbody").text("");
+  for(i=0;i<tableData.length;i++){
+    if(dates_2.includes(tableData[i].datetime) && states.includes(tableData[i].state) && cities.includes(tableData[i].city) && shapes.includes(tableData[i].shape) && countries.includes(tableData[i].country)){
+      
+      var tbodytr = targetBbody.append("tr");
+      tbodytr.append("td").text(tableData[i].datetime);
+      tbodytr.append("td").text(tableData[i].city);
+      tbodytr.append("td").text(tableData[i].state);
+      tbodytr.append("td").text(tableData[i].country);
+      tbodytr.append("td").text(tableData[i].shape);
+      tbodytr.append("td").text(tableData[i].durationMinutes);
+      tbodytr.append("td").text(tableData[i].comments);
 
         }
 
@@ -148,7 +89,7 @@ function filterData(dd) {
 
 for(i=0;i<tableData.length;i++){
 
-    // console.log(tableData[i]);
+   
 
     var tbodytr = targetBbody.append("tr");
 
@@ -192,15 +133,7 @@ for(i=0;i<tableData.length;i++){
 
 }
 
-// console.log(dates);
 
-// console.log(cities);
-
-// console.log(countries);
-
-// console.log(states);
-
-// console.log(shapes);
 
 dates.sort();
 
@@ -306,51 +239,3 @@ function showhid(elem){
 
 
 
-// if(obj.datetime!="" AND obj.state!="" AND obj.shapes!=""){
-
-//     var filterData = tableData.filter(obj => obj.datetime == filters.datetime && obj.state == filters.state && obj.shape == filters.shapes);
-
-// }elseif(obj.datetime!="" AND obj.state!="" AND obj.shapes==""){
-
-//     var filterData = tableData.filter(obj => obj.datetime == filters.datetime && obj.state == filters.state);
-
-// }elseif(obj.datetime!="" AND obj.state=="" AND obj.shapes!=""){
-
-//     var filterData = tableData.filter(obj => obj.datetime == filters.datetime && obj.shape == filters.shapes);
-
-// }elseif(obj.datetime!="" AND obj.state=="" AND obj.shapes==""){
-
-//     var filterData = tableData.filter(obj => obj.datetime == filters.datetime);
-
-// }elseif(obj.datetime=="" AND obj.state!="" AND obj.shapes!=""){
-
-//     var filterData = tableData.filter(obj => obj.state == filters.state && obj.shape == filters.shapes);
-
-// }elseif(obj.datetime="" AND obj.state="" AND obj.shapes=""){
-
-//     var Textwarning = "You need to choose a filter";
-
-// }
-
- 
-
-d3.select("#filter-btn").on("click", handleSubmit);
-
-d3.selectAll("input[type=checkbox]").on("change", handleSubmit);
-
-// var filterdate = d3.select("#datetime").node().value;
-
-// console.log(filterdate);
-
-
-
-// // clear the input value
-
-// targetTtable.select("tbody").text("");
-
-
-
-// // Build the table with the new data
-
-// filterData(filterdate);
-  
